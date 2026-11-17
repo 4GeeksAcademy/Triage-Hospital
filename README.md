@@ -1,71 +1,59 @@
-<img align="right" src="https://assets.breatheco.de/apis/img/images.php?blob&random&cat=icon&tags=4geeks,32">
+# Triage Hospital - Patient Queue Management System
 
-# 4Geeks Academy's Templates and Boilerplates
+> A terminal-based hospital triage queue management system built in Python
 
-> By [@alesanchezr](https://twitter.com/alesanchezr) and [other contributors](https://github.com/4GeeksAcademy/Interactive-Tutorials/graphs/contributors) at [4Geeks Academy](http://4geeksacademy.co/)
+## Overview
 
-![last commit](https://img.shields.io/github/last-commit/4geeksacademy/Templates-Boilerplates)
-[![build by developers](https://img.shields.io/badge/build_by-Developers-blue)](https://breatheco.de)
-[![build by developers](https://img.shields.io/twitter/follow/4geeksacademy?style=social&logo=twitter)](https://twitter.com/4geeksacademy)
+**Triage Hospital** is a command-line application that implements a priority-based patient queue system for hospital triage. It efficiently manages patients arriving at a hospital using a heap-based data structure, ensuring critical patients are always seen first.
 
-```text
-🔥 Here you can find the documentation about these boilerplates: start.4geeksacademy.com
+### Purpose
+
+This system prioritizes patients based on medical urgency levels:
+- **Level 1 (Critical)**: Life-threatening conditions requiring immediate attention
+- **Level 2 (Medium)**: Serious conditions requiring prompt care
+- **Level 3 (Low)**: Non-urgent conditions
+
+Patients are served based on triage level first, then by arrival time within the same level.
+
+### Key Features
+
+- **Efficient Priority Queue**: Uses a min-heap for O(log n) insertions and removals
+- **Thread-Safe Design**: Designed with concurrency support (ready for multi-threaded environments)
+- **Validation**: Strict validation of patient data and input
+- **Real-time Statistics**: Track patients by triage level
+- **Queue Inspection**: View all patients in queue without removing them
+
+## How to Run
+
+Start the application from the command line:
+
+```bash
+python main.py
 ```
 
-- **Empty project**: Ideal for beginners, lightweight server.py to run HTML projects.  
-[Open Repository](https://github.com/4GeeksAcademy/html-hello)
+This launches an interactive terminal menu with the following options:
 
-- **Company project** (Exclusively for AI Engineering career program): Transversal project you will develop along the course
-[Open Repository](https://github.com/4GeeksAcademy/ai-engineering-company-project-monorepo)
+1. **Add Patient**: Enter patient name and triage level (1-3)
+2. **Call Next Patient**: Dequeue and display the highest priority patient
+3. **View Queue**: Display all patients currently in queue, sorted by priority
+4. **View Statistics**: Show patient counts by triage level
+5. **Peek Next**: View the next patient without removing them from queue
+6. **Exit**: Close the application
 
-- **Typescript with Vite**: Use vite without front-end frameworks. Hot Deploy. ES7. Minimum configuration but professional workflow. Ideal for juniors starting with Typescript on Vite.  
-[Open Repository](https://github.com/4GeeksAcademy/typescript-hello)
+## Technical Details
 
-- **Vanilla JS with Vite**: Use vite without front-end frameworks. Hot Deploy. ES7. Minimum configuration but professional workflow. Ideal for juniors starting on Vite.  
-[Open Repository](https://github.com/4GeeksAcademy/vanillajs-hello-vite)
+### Data Structure
+- **Heap-based queue**: `(triage_level, arrived_at, insertion_order, patient)` tuples
+- **Thread-safe by design**: Ready for `threading.Lock` protection
+- **Efficient operations**: Insert and remove in O(log n), peek in O(1)
 
-- **React.js**: Create React App has too many files and almost no utilities; this version is simplified. Ideal for beginners.  
-[Open Repository](https://github.com/4GeeksAcademy/react-hello-vite)
+### Patient Class
+Immutable dataclass with validation for:
+- Non-empty patient names
+- Valid triage levels (1, 2, or 3)
+- Timezone-aware arrival timestamps (UTC)
 
-- **React.js Advanced**: Ideal for professional development, Minimum version for Flux + Context API implemented. One click deploy to several hostings free, documentation, and video tutorials.  
-[Open Repository](https://github.com/4GeeksAcademy/react-hello-webapp)
-
-- **Python Project**: Beginner's starter template for Python.  
-[Open Repository](https://github.com/4GeeksAcademy/python-hello)
-
-- **Flask API**: Ideal for professional backend development, the minimum possible boilerplate for building API's with Flask. Fixes common problems like CORS, Tests, Error Handling, Authentication, SQL Alchemy Integration, Pipenv, .env, One-Click deploy to Heroku (free hosting).  
-[Open Repository](https://github.com/4GeeksAcademy/flask-rest-hello)
-
-- **Full Stack: React + Flask API**: React Front-End and Python/Flask API backend, one-click deploy to Heroku.  
-[Open Repository](https://github.com/4GeeksAcademy/react-flask-hello)
-
-- **Fast API**: Ideal for professional backend development, the minimum possible boilerplate for building API's with Fast API. Fixes common problems like CORS, Tests, Error Handling, Authentication, SQL Alchemy Integration, Pipenv, .env, One-Click deploy to Render.com and Heroku (free hosting).  
-[Open Repository](https://github.com/4GeeksAcademy/fastapi-hello)
-
-
-
-## Other deprecated templates (⚠️ Unmaintained & Deprecated):
-
-- **Vanilla JS with Webpack**: Use webpack without front-end frameworks. Hot Deploy. ES7. Minimum configuration but professional workflow. Ideal for juniors starting on webpack.  
-[Open Repository](https://github.com/4GeeksAcademy/vanillajs-hello)
-
-- **React.js**: Create React App comes with too many files and almost no utilities. With documentation and video tutorials, deploy to different servers in just one command. Ideal for anyone.  
-[Open Repository](https://github.com/4GeeksAcademy/react-hello)
-
-- **Flask API + VanillaJS**: The Flask boilerplate merged with the VanillaJS boilerplate, for anyone interested in publishing front-end and back-end in the same hosting and one unified project.  
-[Open Repository](https://github.com/4GeeksAcademy/flask-api-vanillajs-boilerplate)
-
-- **Django Rest**: Smallest possible approach for building API's with django, one click deploy to Heroku (free hosting), documentation and video tutorials.  
-[Open Repository](https://github.com/4GeeksAcademy/django-rest-hello)
-
-- **Express API (with TypeScript)**: Building API's with Express and TypeScript. Uses TypeORM as ORM. Heroku ready.  
-[Open Repository](https://github.com/4GeeksAcademy/expressjs-rest-hello)
-
-- **Headless WordPress for Developers**: Heavy developer oriented boilerplate for WP, create API's similar to modern frameworks like Flask, Express, etc. MVC Implementation and bare minimum theme implementation. 100% command line integration and installation. No need for the WordPress admin.  
-[Open Repository](https://github.com/4GeeksAcademy/wordpress-hello)
-
-### Contributors
-
-These templates were built as part of the 4Geeks Academy [Coding Bootcamp](https://4geeksacademy.com/us/coding-bootcamp) by [Alejandro Sanchez](https://twitter.com/alesanchezr) and many other contributors. Find out more about our [Full Stack Developer Course](https://4geeksacademy.com/us/coding-bootcamps/part-time-full-stack-developer), [Data Science Bootcamp](https://4geeksacademy.com/us/coding-bootcamps/datascience-machine-learning).
-
-You can find other templates and resources like this at the [school's Github page](https://github.com/4geeksacademy/).
+### Error Handling
+- `EmptyQueueError`: Raised when trying to access an empty queue
+- `ValueError`: Raised for invalid patient data
+- `TypeError`: Raised for incorrect argument types
